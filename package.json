@@ -27,6 +27,10 @@
         "predeploy": "npm run build",
         "deploy": "gh-pages -d build"
     },
+    "build": {
+        "outputDirectory": "dist"
+    },
+
     "browserslist": [
         ">0.2%",
         "not dead",
