@@ -6,7 +6,7 @@
     "main": "src/index.tsx",
     "homepage": "http://codergirlshecodes.github.io/React-Weather-App",
     "dependencies": {
-        "axios": "^1.6.7",
+        "axios": "^1.6.8",
         "bootstrap": "^5.3.3",
         "react": "18.2.0",
         "react-dom": "18.2.0",
@@ -30,7 +30,6 @@
     "build": {
         "outputDirectory": "dist"
     },
-
     "browserslist": [
         ">0.2%",
         "not dead",

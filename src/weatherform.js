@@ -5,7 +5,7 @@ import WeatherInfo from "./WeatherInfo";
 import "./styles.css";
 
 function WeatherForm() {
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState("London");
   const [weatherData, setWeatherData] = useState(null);
 
   const apiKey = "1fd8093fa5ff12d796d7de756cc9d6b9";
@@ -45,29 +45,6 @@ function WeatherForm() {
       transform: "scale(1)",
       from: { opacity: 0, transform: "scale(0.5)" },
     });
-  };
-
-  const getWeatherEmoji = (weatherCode) => {
-    switch (true) {
-      case weatherCode >= 200 && weatherCode < 300:
-        return "⚡️";
-      case weatherCode >= 300 && weatherCode < 500:
-        return "🌧️";
-      case weatherCode >= 500 && weatherCode < 600:
-        return "☔️";
-      case weatherCode >= 600 && weatherCode < 700:
-        return "❄️";
-      case weatherCode >= 700 && weatherCode < 800:
-        return "🌫️";
-      case weatherCode === 800:
-        return "☀️";
-      case weatherCode === 801:
-        return "🌤️";
-      case weatherCode >= 802 && weatherCode < 900:
-        return "☁️";
-      default:
-        return "❓";
-    }
   };
 
   return (
@@ -111,7 +88,6 @@ function WeatherForm() {
 
           {weatherData && weatherData.daily && (
             <div className="forecast">
-              <h3>5-Day Forecast</h3>
               {weatherData.daily.slice(1, 6).map((day, index) => (
                 <div key={index} className="day-container">
                   <animated.div style={getAnimationProps()}>

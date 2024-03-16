@@ -1,35 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "./styles.css";
-import WeatherForecast from "./weatherforecast"; 
+import "./weatherforecast.css";
 
-const WeatherInfo = ({ city, apiKey }) => {
-  const [currentWeather, setCurrentWeather] = useState(null);
+export default WeatherForecast = ({ weatherData, apiKeyforecast }) => {
   const [forecastData, setForecastData] = useState([]);
-
-  useEffect(() => {
-    const fetchWeatherData = async () => {
-      try {
-        if (!city) {
-          return;
-        }
-
-        const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch weather data");
-        }
-
-        const data = await response.json();
-        setCurrentWeather(data);
-      } catch (error) {
-        console.error("Error fetching weather data:", error.message);
-      }
-    };
-
-    fetchWeatherData();
-  }, [city, apiKey]);
 
   useEffect(() => {
     const fetchForecastData = async () => {
@@ -95,21 +68,31 @@ const WeatherInfo = ({ city, apiKey }) => {
     }
   };
 
-  return (
-    <div className="weather-info-container">
-      {currentWeather && (
-        <div className="current-weather">
-          <h2>{city}</h2>
-          <p>{currentWeather.main.temp}</p>
+  <div>
+      {forecastData.map((dayForecast, index) => (
+        <div key={index}>
+          <p>{dayForecast.day}</p>
+          <p>
+            Max Temp: {dayForecast.maxTemperature}, Min Temp:{" "}
+            {dayForecast.minTemperature}
+          </p>
+          <p>Weather: {getWeatherEmoji(dayForecast.weatherCode)}</p>
         </div>
-      )}
-      <WeatherForecast
-        forecastData={forecastData}
-        getWeatherEmoji={getWeatherEmoji}
-        getWeekday={getWeekday}
-      />
+      ))}
+    </div>
+
+  return (
+    <div>
+      {forecastData.map((dayForecast, index) => (
+        <div key={index}>
+          <p>{dayForecast.day}</p>
+          <p>
+            Max Temp: {dayForecast.maxTemperature}, Min Temp:{" "}
+            {dayForecast.minTemperature}
+          </p>
+          <p>Weather: {getWeatherEmoji(dayForecast.weatherCode)}</p>
+        </div>
+      ))}
     </div>
   );
 };
-
-export default WeatherInfo;
